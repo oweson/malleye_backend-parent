@@ -20,10 +20,10 @@ public class BaseExceptionHandler {
     @ExceptionHandler(CommonServiceException.class)
     @ResponseBody
     public BaseResponseVO serviceExceptionHandler(
-            HttpServletRequest request, CommonServiceException e){
+            HttpServletRequest request, CommonServiceException e) {
 
         log.error("CommonServiceException, code:{}, message",
-                e.getCode(),e.getMessage());
+                e.getCode(), e.getMessage());
 
         return BaseResponseVO.serviceException(e);
     }

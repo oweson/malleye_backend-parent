@@ -24,11 +24,11 @@ public class UserServiceImpl implements UserServiceAPI {
 
     @Override
     public String checkUserLogin(String username, String password) throws CommonServiceException {
-        // 根据用户名获取用户信息
+        // 1 根据用户名获取用户信息
         QueryWrapper queryWrapper = new QueryWrapper();
         queryWrapper.eq("user_name", username);
 
-        // 避免数据出现问题
+        // 2 避免数据出现问题
         List<MoocBackendUserT> list = userMapper.selectList(queryWrapper);
         MoocBackendUserT user = null;
         if (list != null && list.size() > 0) {
@@ -37,12 +37,13 @@ public class UserServiceImpl implements UserServiceAPI {
             throw new CommonServiceException(404, "用户名输入有误");
         }
 
-        // 验证密码是否正确【密码要做MD5加密，才能验证是否匹配】
+        // 3 验证密码是否正确【密码要做MD5加密，才能验证是否匹配】
         String encrypt = MD5Util.encrypt(password);
 
         if (!encrypt.equals(user.getUserPwd())) {
             throw new CommonServiceException(500, "用户密码输入有误");
         } else {
+            // todo
             return user.getUuid() + "";
         }
     }
