@@ -49,7 +49,7 @@ public class UserController {
 
         // randomKey  token
         Map<String, String> result = new HashMap<>();
-        // todo 随机key前端用户签名使用
+        // todo 随机key前端用户签名使用,类似salt前端加密密码使用的，最后加密传输
         result.put("randomKey", randomKey);
         result.put("token", token);
 

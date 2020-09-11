@@ -6,7 +6,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class MD5Util {
 
-
+  /**
+   * 1 加密
+   * @param source
+   * @return
+   */
   public static String encrypt(String source) {
     return encodeMd5(source.getBytes());
   }
@@ -28,6 +32,10 @@ public class MD5Util {
       buffer.append(Long.toString((int) bytes[i] & 0xff, 16));
     }
     return buffer.toString();
+  }
+
+  public static void main(String[] args) {
+    System.out.println(encrypt("hello"));
   }
 
 }

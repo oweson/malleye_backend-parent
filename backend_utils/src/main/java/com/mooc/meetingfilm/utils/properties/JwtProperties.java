@@ -15,11 +15,14 @@ public class JwtProperties {
 
     private String secret = "defaultSecret";
 
-    private Long expiration = 604800L; // 默认是七天
+    private Long expiration = 604800L;
+    // 默认是七天
 
     private String authPath = "login";
+    // 什么样的路径颁发jwt
 
     private String md5Key = "randomKey";
+    // md5的key
 
     public static String getJwtPrefix() {
         return JWT_PREFIX;
