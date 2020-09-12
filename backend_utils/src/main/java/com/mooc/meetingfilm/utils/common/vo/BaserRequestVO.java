@@ -9,7 +9,7 @@ import com.mooc.meetingfilm.utils.exception.CommonServiceException;
  **/
 public abstract class BaserRequestVO {
 
-    /**
+    /** 1
     * @Description: 公共的参数验证方法
     * @Param: []
     * @return: void

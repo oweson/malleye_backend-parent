@@ -9,7 +9,7 @@ import lombok.Data;
  * @description : 分页请求类
  **/
 @Data
-public class BasePageVO extends BaserRequestVO{
+public class BasePageVO extends BaserRequestVO {
 
     private Integer nowPage = 1;
     private Integer pageSize = 10;
