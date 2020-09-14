@@ -80,7 +80,13 @@ public class FilmController {
     }
 
 
-    // 根据电影主键获取电影信息
+    /**
+     * 3 根据电影编号获取电影信息
+     *
+     * @param filmId
+     * @return
+     * @throws CommonServiceException
+     */
     @RequestMapping(value = "/{filmId}", method = RequestMethod.GET)
     public BaseResponseVO describeFilmById(@PathVariable("filmId") String filmId) throws CommonServiceException {
 
@@ -93,7 +99,13 @@ public class FilmController {
 
     }
 
-    // 根据电影编号获取电影信息
+    /**
+     * 4 添加电影
+     *
+     * @param filmSavedReqVO
+     * @return
+     * @throws CommonServiceException
+     */
     @RequestMapping(value = "/film:add", method = RequestMethod.POST)
     public BaseResponseVO saveFilmInfo(@RequestBody FilmSavedReqVO filmSavedReqVO) throws CommonServiceException {
 

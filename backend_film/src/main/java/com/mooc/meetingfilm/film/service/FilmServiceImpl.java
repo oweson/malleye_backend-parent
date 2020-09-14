@@ -26,7 +26,7 @@ import javax.annotation.Resource;
  * @description : 影片模块实现层
  **/
 @Service
-public class FilmServiceImpl implements FilmServiceAPI{
+public class FilmServiceImpl implements FilmServiceAPI {
 
     @Resource
     private MoocActorTMapper actorTMapper;
@@ -42,6 +42,8 @@ public class FilmServiceImpl implements FilmServiceAPI{
 
 
     /**
+     * 1
+     *
      * @Description: 演员查询列表
      * @Param: [nowPage, pageSize]
      * @return: com.baomidou.mybatisplus.core.metadata.IPage<com.mooc.meetingfilm.film.controller.vo.DescribeActorsRespVO>
@@ -50,10 +52,12 @@ public class FilmServiceImpl implements FilmServiceAPI{
     @Override
     public IPage<DescribeActorsRespVO> describeActors(int nowPage, int pageSize) throws CommonServiceException {
         // 查询演员列表
-        return actorTMapper.describeActors(new Page<>(nowPage,pageSize));
+        return actorTMapper.describeActors(new Page<>(nowPage, pageSize));
     }
 
     /**
+     * 2
+     *
      * @Description: 影片列表查询
      * @Param: [nowPage, pageSize]
      * @return: com.baomidou.mybatisplus.core.metadata.IPage<com.mooc.meetingfilm.film.controller.vo.DescribeFilmsRespVO>
@@ -61,16 +65,18 @@ public class FilmServiceImpl implements FilmServiceAPI{
      */
     @Override
     public IPage<DescribeFilmsRespVO> describeFilms(int nowPage, int pageSize) throws CommonServiceException {
-        return filmTMapper.describeFilms(new Page<>(nowPage,pageSize));
+        return filmTMapper.describeFilms(new Page<>(nowPage, pageSize));
     }
 
 
     /**
-    * @Description: 根据主键获取电影详情
-    * @Param: [filmId]
-    * @return: com.mooc.meetingfilm.film.controller.vo.DescribeFilmRespVO
-    * @Author: jiangzh
-    */
+     * 3
+     *
+     * @Description: 根据主键获取电影详情
+     * @Param: [filmId]
+     * @return: com.mooc.meetingfilm.film.controller.vo.DescribeFilmRespVO
+     * @Author: jiangzh
+     */
     @Override
     public DescribeFilmRespVO describeFilmById(String filmId) throws CommonServiceException {
         return filmTMapper.descrbeFilmById(filmId);
@@ -78,15 +84,17 @@ public class FilmServiceImpl implements FilmServiceAPI{
 
 
     /**
-    * @Description: 保存电影信息
-    * @Param: [filmSavedReqVO]
-    * @return: void
-    * @Author: jiangzh
-    */
+     * 4
+     *
+     * @Description: 保存电影信息
+     * @Param: [filmSavedReqVO]
+     * @return: void
+     * @Author: jiangzh
+     */
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveFilm(FilmSavedReqVO reqVO) throws CommonServiceException {
-        try{
+        try {
             // 保存电影主表
             MoocFilmT film = new MoocFilmT();
             film.setFilmName(reqVO.getFilmName());
@@ -99,14 +107,14 @@ public class FilmServiceImpl implements FilmServiceAPI{
             film.setFilmCats(reqVO.getFilmCatIds());
             film.setFilmArea(ToolUtils.str2Int(reqVO.getAreaId()));
             film.setFilmDate(ToolUtils.str2Int(reqVO.getDateId()));
-            film.setFilmTime(ToolUtils.str2LocalDateTime(reqVO.getFilmTime()+" 00:00:00"));
+            film.setFilmTime(ToolUtils.str2LocalDateTime(reqVO.getFilmTime() + " 00:00:00"));
             film.setFilmStatus(ToolUtils.str2Int(reqVO.getFilmStatus()));
 
             filmTMapper.insert(film);
             // 保存电影子表
             MoocFilmInfoT filmInfo = new MoocFilmInfoT();
 
-            filmInfo.setFilmId(film.getUuid()+"");
+            filmInfo.setFilmId(film.getUuid() + "");
             filmInfo.setFilmEnName(reqVO.getFilmEnName());
             filmInfo.setFilmScore(reqVO.getFilmScore());
             filmInfo.setFilmScoreNum(ToolUtils.str2Int(reqVO.getFilmScorers()));
@@ -120,11 +128,11 @@ public class FilmServiceImpl implements FilmServiceAPI{
 
             String[] actorId = reqVO.getActIds().split("#");
             String[] roleNames = reqVO.getRoleNames().split("#");
-            if(actorId.length != roleNames.length){
+            if (actorId.length != roleNames.length) {
                 throw new CommonServiceException(500, "演员和角色名数量不匹配");
             }
 
-            for(int i=0;i<actorId.length;i++){
+            for (int i = 0; i < actorId.length; i++) {
                 // 保存演员映射表
                 MoocFilmActorT filmActor = new MoocFilmActorT();
 
@@ -135,7 +143,7 @@ public class FilmServiceImpl implements FilmServiceAPI{
 
                 filmActorTMapper.insert(filmActor);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new CommonServiceException(500, e.getMessage());
         }
     }

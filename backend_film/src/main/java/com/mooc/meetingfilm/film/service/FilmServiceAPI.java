@@ -14,7 +14,13 @@ import com.mooc.meetingfilm.utils.exception.CommonServiceException;
  **/
 public interface FilmServiceAPI {
 
-    // 获取演员列表
+    /**
+     *  1 获取演员列表
+     * @param nowPage
+     * @param pageSize
+     * @return
+     * @throws CommonServiceException
+     */
     IPage<DescribeActorsRespVO> describeActors(int nowPage,int pageSize) throws CommonServiceException;
 
     // 获取电影列表
