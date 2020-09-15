@@ -42,9 +42,8 @@ public class FilmServiceImpl implements FilmServiceAPI {
 
 
     /**
-     * 1
+     * 1 @Description: 演员查询列表
      *
-     * @Description: 演员查询列表
      * @Param: [nowPage, pageSize]
      * @return: com.baomidou.mybatisplus.core.metadata.IPage<com.mooc.meetingfilm.film.controller.vo.DescribeActorsRespVO>
      * @Author: jiangzh
@@ -94,8 +93,9 @@ public class FilmServiceImpl implements FilmServiceAPI {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void saveFilm(FilmSavedReqVO reqVO) throws CommonServiceException {
+        // todo 所有的异常抛出业务异常，exception无法公共异常处理！！！
         try {
-            // 保存电影主表
+            // 1 保存电影主表
             MoocFilmT film = new MoocFilmT();
             film.setFilmName(reqVO.getFilmName());
             film.setFilmType(ToolUtils.str2Int(reqVO.getFilmTypeId()));
@@ -111,9 +111,9 @@ public class FilmServiceImpl implements FilmServiceAPI {
             film.setFilmStatus(ToolUtils.str2Int(reqVO.getFilmStatus()));
 
             filmTMapper.insert(film);
-            // 保存电影子表
+            // 2 保存电影子表
             MoocFilmInfoT filmInfo = new MoocFilmInfoT();
-
+            // 依赖主表的id!
             filmInfo.setFilmId(film.getUuid() + "");
             filmInfo.setFilmEnName(reqVO.getFilmEnName());
             filmInfo.setFilmScore(reqVO.getFilmScore());
@@ -125,7 +125,7 @@ public class FilmServiceImpl implements FilmServiceAPI {
 
 
             filmInfoTMapper.insert(filmInfo);
-
+          // 分解！
             String[] actorId = reqVO.getActIds().split("#");
             String[] roleNames = reqVO.getRoleNames().split("#");
             if (actorId.length != roleNames.length) {
@@ -133,7 +133,7 @@ public class FilmServiceImpl implements FilmServiceAPI {
             }
 
             for (int i = 0; i < actorId.length; i++) {
-                // 保存演员映射表
+                // 3 保存演员映射表
                 MoocFilmActorT filmActor = new MoocFilmActorT();
 
                 filmActor.setFilmId(film.getUuid());
