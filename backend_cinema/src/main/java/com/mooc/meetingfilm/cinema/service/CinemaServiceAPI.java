@@ -12,10 +12,22 @@ import com.mooc.meetingfilm.utils.exception.CommonServiceException;
  **/
 public interface CinemaServiceAPI {
 
-    // 保存影院
+    /**
+     * 1 保存影院
+     *
+     * @param reqVO
+     * @throws CommonServiceException
+     */
     void saveCinema(CinemaSavedReqVO reqVO) throws CommonServiceException;
 
-    // 获取影院列表
-    IPage<DescribeCinemasRespVO> describeCinemas(int nowPage,int pageSize) throws CommonServiceException;
+    /**
+     * 2 获取影院列表
+     *
+     * @param nowPage
+     * @param pageSize
+     * @return
+     * @throws CommonServiceException
+     */
+    IPage<DescribeCinemasRespVO> describeCinemas(int nowPage, int pageSize) throws CommonServiceException;
 
 }

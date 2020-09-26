@@ -1,8 +1,11 @@
 package com.mooc.meetingfilm.cinema.dao.entity;
+
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
+
 /**
  * <p>
  * 影院信息表
@@ -141,15 +144,15 @@ public class MoocCinemaT extends Model<MoocCinemaT> {
     @Override
     public String toString() {
         return "MoocCinemaT{" +
-        ", uuid=" + uuid +
-        ", cinemaName=" + cinemaName +
-        ", cinemaPhone=" + cinemaPhone +
-        ", brandId=" + brandId +
-        ", areaId=" + areaId +
-        ", hallIds=" + hallIds +
-        ", imgAddress=" + imgAddress +
-        ", cinemaAddress=" + cinemaAddress +
-        ", minimumPrice=" + minimumPrice +
-        "}";
+                ", uuid=" + uuid +
+                ", cinemaName=" + cinemaName +
+                ", cinemaPhone=" + cinemaPhone +
+                ", brandId=" + brandId +
+                ", areaId=" + areaId +
+                ", hallIds=" + hallIds +
+                ", imgAddress=" + imgAddress +
+                ", cinemaAddress=" + cinemaAddress +
+                ", minimumPrice=" + minimumPrice +
+                "}";
     }
 }
